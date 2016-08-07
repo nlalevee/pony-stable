@@ -1,12 +1,23 @@
 use "json"
 use "options"
 
-primitive LocalGitProjectRepo
+primitive LocalGitProjectRepo is ProjectRepo
+  fun id(): String => "local-git"
+  fun description(): String => "fetch a git project from a local path"
+  fun help(args: Array[String] box): Array[String] val =>
+    recover [
+      "usage: stable install local-git <path> [options]",
+      "",
+      "<path>  the path to the git repository on the local filesystem",
+      "Options:",
+      "    --tag, -t",
+      "        specifies the tag which should be checkouted"
+    ] end
   
-  fun tag create_dep(log: Log, dep: JsonObject box): BundleDep? =>
+  fun create_dep(log: Log, dep: JsonObject box): BundleDep? =>
     _BundleDepLocalGit(log, dep)
   
-  fun tag add(args: Array[String] box): JsonObject ref? =>
+  fun add(args: Array[String] box): JsonObject ref? =>
     let json: JsonObject ref = JsonObject.create()
     json.data("type") = "local-git"
     json.data("local-path") = args(0)

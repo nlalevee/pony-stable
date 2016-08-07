@@ -43,7 +43,7 @@ class Bundle
       fun ref has_next(): Bool    => inner.has_next()
       fun ref next(): BundleDep^? =>
         let next_json = inner.next() as JsonObject box
-        ProjectRepoFactory(next_json.data("type") as String).create_dep(logger, next_json)
+        ProjectRepoFactory.get(next_json.data("type") as String).create_dep(logger, next_json)
     end
   
   fun fetch() =>

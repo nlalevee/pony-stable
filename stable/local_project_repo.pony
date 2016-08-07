@@ -1,11 +1,19 @@
 use "json"
 
-primitive LocalProjectRepo
+primitive LocalProjectRepo is ProjectRepo
+  fun id(): String => "local"
+  fun description(): String => "just a reference to a project on the local filesystem"
+  fun help(args: Array[String] box): Array[String] val =>
+    recover [
+      "usage: stable install local <path>",
+      "",
+      "<path>  the path to the project which should be included into the PONYPATH"
+    ] end
   
-  fun tag create_dep(log: Log, dep: JsonObject box): BundleDep? =>
+  fun create_dep(log: Log, dep: JsonObject box): BundleDep? =>
     _BundleDepLocal(log, dep)
   
-  fun tag add(args: Array[String] box): JsonObject ref? =>
+  fun add(args: Array[String] box): JsonObject ref? =>
     let json: JsonObject ref = JsonObject.create()
     json.data("type") = "local"
     json.data("local-path") = args(0)

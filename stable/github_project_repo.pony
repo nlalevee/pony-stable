@@ -1,12 +1,28 @@
 use "json"
 use "options"
 
-primitive GithubProjectRepo
+primitive GithubProjectRepo is ProjectRepo
+  fun id(): String => "github"
+  fun description(): String => "fetch a git project from github.com"
+  fun help(args: Array[String] box): Array[String] val =>
+    recover [
+      "usage: stable install github <repoid> [options]",
+      "",
+      "<repoid>"
+      "        the id of the github repository. It is composed of the user name",
+      "        and the repository name. For instance: jemc/pony-inspect",
+      "Options:",
+      "    --tag, -t",
+      "        specifies the tag which should be checkouted",
+      "    --subdir, -d",
+      "        specifies the subdiretory in the checkouted resources which",
+      "        should be included into the PONYPATH"
+    ] end
   
-  fun tag create_dep(log: Log, dep: JsonObject box): BundleDep? =>
+  fun create_dep(log: Log, dep: JsonObject box): BundleDep? =>
     _BundleDepGitHub(log, dep)
   
-  fun tag add(args: Array[String] box): JsonObject ref? =>
+  fun add(args: Array[String] box): JsonObject ref? =>
     let json: JsonObject ref = JsonObject.create()
     json.data("type") = "github"
     json.data("repo") = args(0)
