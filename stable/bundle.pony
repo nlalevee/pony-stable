@@ -38,12 +38,12 @@ class Bundle
                      end
     
     object is Iterator[BundleDep]
-      let bundle: Bundle box = this
+      let logger: Log = this.log
       let inner: Iterator[JsonType box] = deps_array.data.values()
       fun ref has_next(): Bool    => inner.has_next()
       fun ref next(): BundleDep^? =>
         let next_json = inner.next() as JsonObject box
-        ProjectRepoFactory(next_json.data("type") as String).create_dep(bundle, next_json)
+        ProjectRepoFactory(next_json.data("type") as String).create_dep(logger, next_json)
     end
   
   fun fetch() =>

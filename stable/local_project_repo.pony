@@ -2,8 +2,8 @@ use "json"
 
 primitive LocalProjectRepo
   
-  fun tag create_dep(bundle: Bundle box, dep: JsonObject box): BundleDep? =>
-    _BundleDepLocal(bundle, dep)
+  fun tag create_dep(log: Log, dep: JsonObject box): BundleDep? =>
+    _BundleDepLocal(log, dep)
   
   fun tag add(args: Array[String] box): JsonObject ref? =>
     let json: JsonObject ref = JsonObject.create()
@@ -13,14 +13,10 @@ primitive LocalProjectRepo
 
 
 class _BundleDepLocal
-  let bundle: Bundle box
-  let info: JsonObject box
   let local_path: String
-  new create(b: Bundle box, i: JsonObject box)? =>
-    bundle       = b
-    info         = i
+  new create(log: Log, info: JsonObject box)? =>
     local_path   = try info.data("local-path") as String
-                   else bundle.log("No 'local-path' key in dep: " + info.string()); error
+                   else log("No 'local-path' key in dep: " + info.string()); error
                    end
   
   fun root_path(): String => local_path
