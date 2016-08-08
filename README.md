@@ -100,3 +100,42 @@ Generating
 Writing ./myproject.o
 Linking ./myproject
 ```
+
+## Get inline help
+
+```bash
+stable help
+```
+```
+Usage: stable <command> [command-args]
+
+    A simple dependency manager for the Pony language.
+
+    Invoke in a working directory containing a bundle.json.
+
+Commands:
+    help    - Print help about stable and its commands
+    install - Install a new dependency
+    fetch   - Fetch/update the deps for this bundle
+    env     - Execute the following shell command inside an environment
+              with PONYPATH set to include deps directories
+
+Type 'stable help <command>' for help on a specific command.
+```
+
+```bash
+stable help install github
+```
+```
+usage: stable install github <repoid> [options]
+
+<repoid>
+        the id of the github repository. It is composed of the user name
+        and the repository name. For instance: jemc/pony-inspect
+Options:
+    --tag, -t
+        specifies the tag which should be checkouted
+    --subdir, -d
+        specifies the subdiretory in the checkouted resources which
+        should be included into the PONYPATH
+```
