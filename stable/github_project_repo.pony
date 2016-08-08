@@ -8,7 +8,7 @@ primitive GithubProjectRepo is ProjectRepo
     recover [
       "usage: stable install github <repoid> [options]",
       "",
-      "<repoid>"
+      "<repoid>",
       "        the id of the github repository. It is composed of the user name",
       "        and the repository name. For instance: jemc/pony-inspect",
       "Options:",
