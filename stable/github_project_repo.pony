@@ -6,7 +6,7 @@ primitive GithubProjectRepo is ProjectRepo
   fun description(): String => "fetch a git project from github.com"
   fun help(args: Array[String] box): Array[String] val =>
     recover [
-      "usage: stable install github <repoid> [options]",
+      "usage: stable add github <repoid> [options]",
       "",
       "<repoid>",
       "        the id of the github repository. It is composed of the user name",

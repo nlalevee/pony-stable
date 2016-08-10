@@ -5,7 +5,7 @@ primitive LocalProjectRepo is ProjectRepo
   fun description(): String => "just a reference to a project on the local filesystem"
   fun help(args: Array[String] box): Array[String] val =>
     recover [
-      "usage: stable install local <path>",
+      "usage: stable add local <path>",
       "",
       "<path>  the path to the project which should be included into the PONYPATH"
     ] end

@@ -114,20 +114,20 @@ Usage: stable <command> [command-args]
     Invoke in a working directory containing a bundle.json.
 
 Commands:
-    help    - Print help about stable and its commands
-    install - Install a new dependency
-    fetch   - Fetch/update the deps for this bundle
-    env     - Execute the following shell command inside an environment
-              with PONYPATH set to include deps directories
+    help  - Print help about stable and its commands
+    add   - Add a new dependency
+    fetch - Fetch/update the deps for this bundle
+    env   - Execute the following shell command inside an environment
+            with PONYPATH set to include deps directories
 
 Type 'stable help <command>' for help on a specific command.
 ```
 
 ```bash
-stable help install github
+stable help add github
 ```
 ```
-usage: stable install github <repoid> [options]
+usage: stable add github <repoid> [options]
 
 <repoid>
         the id of the github repository. It is composed of the user name

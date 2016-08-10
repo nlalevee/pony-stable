@@ -6,7 +6,7 @@ primitive LocalGitProjectRepo is ProjectRepo
   fun description(): String => "fetch a git project from a local path"
   fun help(args: Array[String] box): Array[String] val =>
     recover [
-      "usage: stable install local-git <path> [options]",
+      "usage: stable add local-git <path> [options]",
       "",
       "<path>  the path to the git repository on the local filesystem",
       "Options:",
