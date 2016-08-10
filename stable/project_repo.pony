@@ -2,17 +2,19 @@
 use "json"
 use "debug"
 
-interface BundleDep
-  fun root_path(): String
-  fun packages_path(): String
-  fun ref fetch()?
+interface val BundleDep
+  fun val root_path(): String
+  fun val packages_path(): String
+  fun val fetch() ?
+  fun val to_json(): JsonObject
+  fun val resolve(): BundleDep ?
 
 interface val ProjectRepo
   fun id(): String
   fun description(): String
   fun help(args: Array[String] box): Array[String] val
-  fun create_dep(log: Log, dep: JsonObject box): BundleDep?
-  fun add(args: Array[String] box): JsonObject ref?
+  fun parse_json(log: Log, dep: JsonObject box): BundleDep ?
+  fun parse_args(args: Array[String] box): BundleDep ?
 
 
 primitive ProjectRepoFactory

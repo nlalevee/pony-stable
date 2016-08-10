@@ -11,8 +11,11 @@ actor Main
     
     command(try env.args(1) else "" end, env.args.slice(2))
   
-  fun _load_bundle(create_on_missing: Bool = false): Bundle? =>
-    try Bundle(FilePath(env.root as AmbientAuth, "."), log, create_on_missing)
+  fun _load_bundle(): Bundle? =>
+    try
+      let bundle = Bundle.create(FilePath(env.root as AmbientAuth, "."))
+      bundle.load(log)
+      bundle
     else log("No bundle in current working directory."); error
     end
   
@@ -40,10 +43,10 @@ actor Main
   
   fun command("add", rest: Array[String] box) =>
     try
-      let bundle = _load_bundle(true)
-      let added_json = ProjectRepoFactory.get(rest(0)).add(rest.slice(1))
-      bundle.add_dep(added_json)
-      bundle.fetch()
+      let bundle = _load_bundle()
+      let bundle_dep = ProjectRepoFactory.get(rest(0)).parse_args(rest.slice(1))
+      bundle.add(bundle_dep)
+      bundle.resolve()
     end
   
   fun command("help", rest: Array[String] box) =>
